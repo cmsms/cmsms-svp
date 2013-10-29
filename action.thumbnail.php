@@ -15,10 +15,11 @@ if (!isset($gCms)) exit;
 
 if (isset($params['url']))
 {
-	$mod_params = array();
-	if(isset($params['width']))	{ $mod_params['width'] = $params['width'];}
-	if(isset($params['height']))	{ $mod_params['height'] = $params['height'];}
-	if(isset($params['version']))	{ $mod_params['version'] = $params['version'];}
-	
-	echo SVPBase::thumbnail($params['url'], $mod_params);
+    $video = SVPBase::getInstance($params['url'], $params);
+
+    try {
+        echo $video->thumbnail();
+    } catch (Exception $e) {
+        echo '<!-- ' . $e->getMessage() . ' -->';
+    }
 }

@@ -36,6 +36,11 @@ $lang['help'] = '<h3>What Does This Do?</h3>
 <h3>Support</h3>
 <p>As per the GPL, this software is provided as-is. Please read the text of the license for the full disclaimer.</p>
 <h3>Copyright and License</h3>
-<p>Copyright &copy; 2010, Jean-Christophe Cuvelier <a href="mailto:jcc@morris-chapman.com">&lt;jcc@morris-chapman.com&gt;</a>. All Rights Are Reserved.</p>
+<p>Copyright &copy; 2010, Jean-Christophe Cuvelier <a href="mailto:jcc@atomseeds.com">&lt;jcc@atomseeeds.com&gt;</a>. All Rights Are Reserved.</p>
+<p>This module is supported by:
+<ul>
+    <li><a href="http://www.morris-chapman.com">Morris &amp; Chapman Belgium</a></li>
+</ul>
+</p>
 <p>This module has been released under the <a href="http://www.gnu.org/licenses/licenses.html#GPL">GNU Public License</a>. You must agree to this license before using the module.</p>';
 ?>

@@ -1,5 +1,5 @@
 <?php
-if (!isset($gCms)) exit;
+if (!cmsms()) exit;
 
 /* -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 
@@ -14,10 +14,15 @@ if (!isset($gCms)) exit;
 
 if (isset($params['url']))
 {
-	$mod_params = array();
-	if(isset($params['width']))	{ $mod_params['width'] = $params['width'];}
-	if(isset($params['height']))	{ $mod_params['height'] = $params['height'];}
-	if(isset($params['modestbranding'])) {  $mod_params['modestbranding'] = 1;  }
-	
-	echo SVPBase::player($params['url'], $mod_params);
+    $video = SVPBase::getInstance($params['url'], $params);
+
+    try {
+        echo $video->player();
+    } catch (Exception $e) {
+        echo '<!-- ' . $e->getMessage() . ' -->';
+    }
+}
+elseif(isset($params['debug']))
+{
+    echo '<p style="color: red;">URL Not specified!</p>';
 }

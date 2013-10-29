@@ -37,48 +37,146 @@
 # - Check out the forums at http://forums.cmsmadesimple.org
 # - Chat with developers on the #cms IRC channel
 #-------------------------------------------------------------------------
-require_once('libraries/classes/SVPBase.class.php');
 
 class SVP extends CMSModule
 {
 
-	function GetName()					{	return 'SVP';							}
-	function GetFriendlyName()			{	return $this->Lang('friendlyname');		}
-	function GetVersion()				{	return '0.1.8';							}
-	function GetHelp()					{	return $this->Lang('help');				}
-	function GetAuthor()				{	return 'Jean-Christophe Cuvelier';		}
-	function GetAuthorEmail()			{	return 'jcc@morris-chapman.com';		}
-	function GetChangeLog()				{	return $this->Lang('changelog');		}
-	function IsPluginModule()			{	return true;							}
-	function HasAdmin()					{	return true;							}
-	function GetAdminSection()			{	return 'extensions';					}
-	function GetAdminDescription()		{	return $this->Lang('admindescription');	}
-	function VisibleToAdminUser()		{   return $this->CheckAccess();					}
-	function CheckAccess($perm = '')	{	return $this->CheckPermission($perm);	}
-	
-    function DisplayErrorPage($id, &$params, $return_id, $message='')
+    public function GetName()
     {
-		$this->smarty->assign('title_error', $this->Lang('error'));
-		$this->smarty->assign_by_ref('message', $message);
+        return 'SVP';
+    }
+
+    public function GetFriendlyName()
+    {
+        return $this->Lang('friendlyname');
+    }
+
+    public function GetVersion()
+    {
+        return '1.0.0';
+    }
+
+    public function GetHelp()
+    {
+        return $this->Lang('help');
+    }
+
+    public function GetAuthor()
+    {
+        return 'Jean-Christophe Cuvelier';
+    }
+
+    public function GetAuthorEmail()
+    {
+        return 'jcc@atomseeds.com';
+    }
+
+    public function GetChangeLog()
+    {
+        return $this->Lang('changelog');
+    }
+
+    public function IsPluginModule()
+    {
+        return true;
+    }
+
+    public function HasAdmin()
+    {
+        return true;
+    }
+
+    public function GetAdminSection()
+    {
+        return 'extensions';
+    }
+
+    public function GetAdminDescription()
+    {
+        return $this->Lang('admindescription');
+    }
+
+    public function VisibleToAdminUser()
+    {
+        return $this->CheckAccess();
+    }
+
+    public function CheckAccess($perm = '')
+    {
+        return $this->CheckPermission($perm);
+    }
+
+    public function DisplayErrorPage($id, &$params, $return_id, $message = '')
+    {
+        $this->smarty->assign('title_error', $this->Lang('error'));
+        $this->smarty->assign_by_ref('message', $message);
 
         // Display the populated template
         echo $this->ProcessTemplate('error.tpl');
     }
 
-	function GetDependencies()			{	return array();	}
-	function MinimumCMSVersion()		{	return "1.6";	}
+    public function GetDependencies()
+    {
+        return array();
+    }
 
-	/*
-	function MaximumCMSVersion()
-	{
-		return "";
-	}
-	*/
+    public function MinimumCMSVersion()
+    {
+        return "1.10";
+    }
 
-	function InstallPostMessage()		{	return $this->Lang('postinstall');	}
-	function UninstallPostMessage()		{	return $this->Lang('postuninstall');	}
-	function UninstallPreMessage()		{	return $this->Lang('really_uninstall');	}
-	function SetParameters()			{   $this->RegisterModulePlugin();	}
+    public function Install()
+    {
+        $this->RegisterModulePlugin(true);
+        $this->Audit(0, $this->Lang('friendlyname'), $this->Lang('installed', $this->GetVersion()));
+    }
+
+    public function InstallPostMessage()
+    {
+        return $this->Lang('postinstall');
+    }
+
+    public function Uninstall()
+    {
+        $this->Audit(0, $this->Lang('friendlyname'), $this->Lang('uninstalled'));
+    }
+
+    public function UninstallPostMessage()
+    {
+        return $this->Lang('postuninstall');
+    }
+
+    public function UninstallPreMessage()
+    {
+        return $this->Lang('really_uninstall');
+    }
+
+    public function Upgrade($oldversion, $newversion)
+    {
+        $current_version = $oldversion;
+        switch ($current_version) {
+            case "1.0":
+                break;
+            case "1.1":
+                break;
+        }
+
+        // put mention into the admin log
+        $this->Audit(0, $this->Lang('friendlyname'), $this->Lang('upgraded', $this->GetVersion()));
+    }
+
+    public function InitializeFrontend()
+    {
+        $this->RestrictUnknownParams();
+
+        $this->SetParameterType('url', CLEAN_STRING);
+        $this->SetParameterType('width', CLEAN_STRING);
+        $this->SetParameterType('height', CLEAN_STRING);
+        $this->SetParameterType('modestbranding', CLEAN_STRING);
+        $this->SetParameterType('debug', CLEAN_STRING);
+        $this->SetParameterType('version', CLEAN_STRING);
+        $this->SetParameterType('wmode', CLEAN_STRING);
+    }
 }
 
 ?>
