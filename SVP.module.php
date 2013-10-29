@@ -53,7 +53,7 @@ class SVP extends CMSModule
 
     public function GetVersion()
     {
-        return '1.0.0';
+        return '1.0.1';
     }
 
     public function GetHelp()

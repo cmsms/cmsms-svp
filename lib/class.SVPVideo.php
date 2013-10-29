@@ -52,7 +52,7 @@ class SVPVideo
         /** @var SVP $svp */
         $svp = cms_utils::get_module('SVP');
         global $id;
-        return $svp->create_url($id, 'embedded', '', array('url' => $this->url), false, true);
+        return $svp->create_url($id, 'embedded', '', array('url' => $this->url, 'showtemplate' => false), false, true);
     }
 
     /**
