@@ -32,7 +32,7 @@
         public function thumbnail($params = array())
         {
             $version =  (isset($params['version']))?$params['version']:'hqdefault.jpg';
-            return 'http://i3.ytimg.com/vi/' . $this->video_id . '/' . $version;
+            return 'http://i3.ytimg.com/vi/' . $this->getVideoId() . '/' . $version;
         }
 
         /**
