@@ -18,7 +18,7 @@ if (isset($params['url']))
     $video = SVPBase::getInstance($params['url'], $params);
 
     try {
-        echo $video->thumbnail();
+        echo $video->thumbnail($params);
     } catch (Exception $e) {
         echo '<!-- ' . $e->getMessage() . ' -->';
     }
