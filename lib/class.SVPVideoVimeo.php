@@ -27,7 +27,7 @@ class SVPVideoVimeo extends SVPVideo
         }
     }
 
-    public function thumbnail()
+    public function thumbnail($params = array())
     {
         $oembed = $this->getVimeoXml();
         return html_entity_decode($oembed->thumbnail_url);
